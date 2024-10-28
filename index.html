@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escalas Médicas</title>
+    <style>
+        h1 { text-align: center; color: #333; font-size: 24px; margin-bottom: 20px; }
+        .tab { overflow: hidden; border-bottom: 1px solid #ccc; }
+        .tab button { background-color: inherit; border: none; outline: none; cursor: pointer; padding: 14px 16px; transition: 0.3s; }
+        .tab button:hover { background-color: #ddd; }
+        .tab button.active { background-color: #ccc; }
+        .tabcontent { display: none; padding: 6px 12px; border-top: none; }
+        #tab-content-object { height: 91vh; width: 99vw; }
+    </style>
+</head>
+<body>
+    <div class="tab">
+        <button class="tablinks active" onclick="openTab(event, 'NIHSS')">Score NIHSS</button>
+        <button class="tablinks" onclick="openTab(event, 'MEEM')">Mini Exame do Estado Mental (MEEM)</button>
+        <button class="tablinks" onclick="openTab(event, 'UPDRS')">Escala UPDRS - Seção III</button>
+    </div>
+    <div id="tab-atual">
+        <object id="tab-content-object" type="text/html" data="nihss.html"></object>
+    </div>
+<script>
+    function openTab(evt, tabName) {
+        tablinks = document.getElementsByClassName("tablinks");
+        for (const tabLink of tablinks) {
+            tabLink.className = tabLink.className.replace(" active", "");
+        }
+        evt.currentTarget.className += " active";
+
+        var objectElement = document.getElementById("tab-content-object");
+        var tabDataMap = {
+            'UPDRS': 'updrs.html',
+            'NIHSS': 'nihss.html',
+            'MEEM': 'meem.html'
+        };
+        objectElement.data = tabDataMap[tabName];
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Score NIHSS (NIH Stroke Scale) - Ilustrado</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+
+    .header {
+      background-color: #1976D2;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      border-radius: 8px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .header h1 {
+      font-size: 2em;
+      margin: 0;
+      font-weight: bold;
+    }
+
+    .case-presentation,
+    .patient-info {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+      border-left: 5px solid #2196F3;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .patient-info input {
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid #ddd;
+      margin: 5px 0;
+      width: 100%;
+    }
+
+    .flex-container {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .small-input {
+      flex: 1;
+      min-width: 150px;
+    }
+
+    .nihss-item {
+      background-color: #fff;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .nihss-item h3 {
+      color: #1976D2;
+      margin-top: 0;
+      border-bottom: 2px solid #1976D2;
+      padding-bottom: 10px;
+    }
+
+    .clinical-example,
+    .scoring-guide,
+    .instruction-box {
+      background-color: #FAFAFA;
+      padding: 15px;
+      border-radius: 4px;
+      margin: 10px 0;
+    }
+
+    .instruction-box {
+      background-color: #E8F5E9;
+      border-left: 4px solid #4CAF50;
+    }
+
+    .total-score {
+      background-color: #1976D2;
+      color: white;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+      text-align: center;
+      font-size: 1.2em;
+    }
+    .width-50p {
+      width: 50%;
+    }
+    .width-30p {
+      width: 30%;
+    }
+    .responsive-img {
+      height: auto;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Cabeçalho da Escala -->
+  <div class="header">
+    <h1>Score NIHSS (NIH Stroke Scale) - Ilustrado</h1>
+  </div>
+
+  <!-- Identificação do Paciente -->
+  <div class="patient-info">
+    <h2>Identificação do Paciente</h2>
+    <div class="flex-container">
+      <div class="small-input">
+        <label for="nomePaciente">Nome:</label>
+        <input type="text" id="nomePaciente" placeholder="Nome do Paciente">
+      </div>
+      <div class="small-input">
+        <label for="prontuario">Prontuário:</label>
+        <input type="text" id="prontuario" placeholder="Número do Prontuário">
+      </div>
+    </div>
+    <div class="flex-container">
+      <div class="small-input">
+        <label for="dataNascimento">Data de Nascimento:</label>
+        <input type="date" id="dataNascimento" onchange="calculaIdade()">
+      </div>
+      <div class="small-input">
+        <label for="idade">Idade:</label>
+        <input type="text" id="idade" readonly>
+      </div>
+    </div>
+  </div>
+
+  <!-- Caso Clínico e Avaliação NIHSS -->
+  <div class="case-presentation">
+    <h2>Caso Clínico Detalhado</h2>
+    <p>Paciente: João S., 68 anos</p>
+    <p>História Prévia: Hipertenso e diabético em uso regular de Losartana 50mg/dia e Metformina 850mg 2x/dia.</p>
+    <p>Quadro Atual: Admitido na emergência às 14:30h com início súbito dos sintomas às 13:45h (há 45 minutos):</p>
+    <ul>
+      <li>Fraqueza no hemicorpo direito</li>
+      <li>Dificuldade para articular palavras</li>
+      <li>Desvio da comissura labial</li>
+      <li>Desvio do olhar para a esquerda</li>
+    </ul>
+    <p>Sinais Vitais: PA 180/100 mmHg, FC 88 bpm, SatO2 97% em ar ambiente</p>
+  </div>
+  <!-- NIHSS Avaliação - 1A e 1B -->
+  <div class="nihss-item">
+    <h3>1A. Nível de Consciência</h3>
+
+    <div class="instruction-box">
+      <strong>Instruções de Realização:</strong>
+      <p>O primeiro passo para avaliar o nível de consciência é observar o estado de alerta do paciente. Em pacientes
+        neurológicos, especialmente aqueles com AVC, o nível de consciência nos dá uma ideia da gravidade do insulto
+        neurológico.</p>
+      <p>Para essa avaliação:</p>
+      <ul>
+        <li><strong>Alerta (Pontuação 0):</strong> O paciente está acordado e responde normalmente, mostrando atenção ao
+          ambiente sem necessidade de estímulo adicional.</li>
+        <li><strong>Não alerta, mas responde a estímulos mínimos (Pontuação 1):</strong> O paciente não está totalmente
+          alerta. No entanto, ele consegue responder a estímulos verbais leves (como ser chamado pelo nome) e obedece a
+          comandos simples. Nessa situação, o paciente pode parecer sonolento, mas desperta e coopera ao mínimo
+          estímulo.</li>
+        <li><strong>Requer estimulação repetida ou dolorosa (Pontuação 2):</strong> O paciente é menos responsivo,
+          necessitando de estímulos repetidos ou até mesmo dolorosos para gerar uma resposta. A resposta não deve ser
+          estereotipada. Pacientes nesse nível frequentemente precisam de estímulos mais intensos e podem responder de
+          maneira lenta ou incompleta.</li>
+        <li><strong>Responde apenas com reflexos ou reações autonômicas (Pontuação 3):</strong> Nesse caso, o paciente
+          não responde a estímulos com movimentos voluntários. Ele pode apresentar apenas respostas reflexas ou reações
+          autonômicas (como mudança de frequência cardíaca ao estímulo doloroso). O paciente é flácido, arreflexo e
+          totalmente irresponsivo.</li>
+      </ul>
+      <p>Se o paciente estiver intubado ou com outros fatores que dificultem a avaliação, ainda assim deve-se pontuar
+        conforme a resposta observada, considerando que uma pontuação de 3 só é dada se não houver nenhum movimento
+        voluntário em resposta ao estímulo.</p>
+    </div>
+
+    <div class="scoring-guide">
+      <h4>Critérios de Avaliação:</h4>
+      <ul>
+        <li><strong>0 = Alerta:</strong> Responde de forma normal ao ambiente.</li>
+        <li><strong>1 = Não alerta, mas responde a mínima estimulação:</strong> Desperta com estímulos leves e obedece a
+          comandos simples.</li>
+        <li><strong>2 = Requer estimulação repetida ou dolorosa:</strong> Necessita estímulos mais intensos para
+          responder, com respostas lentas ou incompletas.</li>
+        <li><strong>3 = Reflexo motor ou reações autonômicas:</strong> Sem resposta voluntária; apenas respostas
+          reflexas ou reações autonômicas.</li>
+      </ul>
+    </div>
+
+    <div class="clinical-example">
+      <h4>Exemplo Prático:</h4>
+      <p>O paciente João S. foi encontrado sonolento, mas ele abre os olhos ao ser chamado pelo nome e consegue
+        manter-se acordado durante o exame por curtos períodos. De acordo com os critérios de avaliação, a pontuação
+        para este estado é <strong>1</strong> (não alerta, mas responde à mínima estimulação).</p>
+    </div>
+
+    <select id="consciousnessLevel" onchange="updateScore()">
+      <option value="0">0 - Alerta</option>
+      <option value="1">1 - Não alerta, responde a estímulos</option>
+      <option value="2">2 - Requer estimulação repetida</option>
+      <option value="3">3 - Responde apenas com reflexos</option>
+    </select>
+  </div>
+
+  <div class="nihss-item">
+    <h3>1B. Perguntas de Nível de Consciência</h3>
+
+    <div class="instruction-box">
+      <strong>Instruções de Realização:</strong>
+      <p>Neste item, queremos avaliar a orientação básica do paciente perguntando sobre <strong>o mês atual</strong> e
+        sua <strong>idade</strong>. Essas perguntas são simples, mas reveladoras. A forma como o paciente responde a
+        essas questões demonstra sua compreensão e orientação, e nos ajuda a identificar possíveis déficits cognitivos.
+      </p>
+      <p>Oriente o paciente claramente sobre as perguntas e espere pela resposta inicial. Evite oferecer dicas verbais
+        ou não verbais que possam "ajudar" o paciente, pois precisamos de uma resposta autêntica.</p>
+      <p><strong>Casos Específicos:</strong></p>
+      <ul>
+        <li><strong>Paciente com afasia ou estupor:</strong> Se o paciente não entende as perguntas ou não consegue
+          responder devido a afasia, a pontuação é 2.</li>
+        <li><strong>Paciente incapaz de falar por causas físicas:</strong> Em casos de intubação, trauma, disartria
+          grave ou barreiras de linguagem (que não sejam por afasia), a pontuação é 1.</li>
+      </ul>
+    </div>
+
+    <div class="scoring-guide">
+      <h4>Critérios de Avaliação:</h4>
+      <ul>
+        <li><strong>0 = Responde ambas as questões corretamente:</strong> Responde o mês e a idade corretamente.</li>
+        <li><strong>1 = Responde uma questão corretamente:</strong> Responde apenas uma das perguntas de forma correta.
+        </li>
+        <li><strong>2 = Não responde nenhuma questão corretamente:</strong> Não compreende ou responde incorretamente
+          ambas as perguntas.</li>
+      </ul>
+    </div>
+
+    <div class="clinical-example">
+      <h4>Exemplo Prático:</h4>
+      <p>Durante a avaliação do paciente João S., ele foi questionado sobre o mês e sua idade. O paciente, porém,
+        respondeu incorretamente a ambas as perguntas, indicando dificuldades de compreensão, possivelmente devido à
+        afasia. Com base nos critérios, a pontuação correta para este item seria <strong>2</strong> (não responde
+        nenhuma questão corretamente).</p>
+    </div>
+
+    <select id="consciousnessQuestions" onchange="updateScore()">
+      <option value="0">0 - Responde ambas as questões corretamente</option>
+      <option value="1">1 - Responde uma questão corretamente</option>
+      <option value="2">2 - Não responde nenhuma questão corretamente</option>
+    </select>
+
+
+    <!-- 1C: Comandos de Nível de Consciência -->
+    <div class="nihss-item">
+      <h3>1C. Comandos de Nível de Consciência</h3>
+
+      <div class="instruction-box">
+        <strong>Instruções de Realização:</strong>
+        <p>O paciente deve ser solicitado a abrir e fechar os olhos e, em seguida, abrir e fechar a mão que não
+          apresenta paralisia. Se as mãos não puderem ser utilizadas, substitua por outro comando simples (ex: levantar
+          o braço). Dê crédito se o paciente tentar realizar a tarefa, mesmo que não complete devido à fraqueza.</p>
+        <p>Se o paciente não responder ao comando verbal, demonstre o comando (faça uma pantomima). A primeira tentativa
+          é a que conta para pontuação. Pacientes com trauma, amputação ou impedimento físico devem receber comandos
+          compatíveis.</p>
+      </div>
+
+      <div class="scoring-guide">
+        <h4>Critérios de Avaliação:</h4>
+        <ul>
+          <li><strong>0 = Realiza ambas as tarefas corretamente:</strong> O paciente realiza corretamente o comando de
+            abrir e fechar os olhos e a mão não parética (ou outro comando se aplicável).</li>
+          <li><strong>1 = Realiza uma tarefa corretamente:</strong> O paciente realiza apenas uma das tarefas de forma
+            correta.</li>
+          <li><strong>2 = Não realiza nenhuma tarefa corretamente:</strong> O paciente não realiza nenhuma das tarefas,
+            mesmo após demonstração.</li>
+        </ul>
+      </div>
+
+      <select id="consciousnessCommands" onchange="updateScore()">
+        <option value="0">0 - Realiza ambas as tarefas corretamente</option>
+        <option value="1">1 - Realiza uma tarefa corretamente</option>
+        <option value="2">2 - Não realiza nenhuma tarefa corretamente</option>
+      </select>
+    </div>
+
+    <!-- 2: Melhor Olhar Conjugado -->
+    <div class="nihss-item">
+      <h3>2. Melhor Olhar Conjugado</h3>
+
+      <div class="instruction-box">
+        <strong>Instruções de Realização:</strong>
+        <p>Para este item, avalie apenas os movimentos oculares horizontais, seja voluntários ou reflexos
+          (óculo-cefálico). A prova calórica não deve ser utilizada. Avalie o olhar conjugado mesmo em pacientes
+          afásicos. Pacientes com limitações, como trauma ocular, curativos, cegueira ou alterações de campo visual,
+          devem ser avaliados com movimentos reflexos.</p>
+      </div>
+
+      <div class="scoring-guide">
+        <h4>Critérios de Avaliação:</h4>
+        <ul>
+          <li><strong>0 = Normal:</strong> Movimentos oculares horizontais normais.</li>
+          <li><strong>1 = Paralisia parcial do olhar:</strong> Anormalidade no movimento ocular horizontal em um ou
+            ambos os olhos, mas sem desvio forçado.</li>
+          <li><strong>2 = Desvio forçado ou paralisia total do olhar:</strong> Desvio ou paralisia total do olhar que
+            não pode ser corrigido com manobra óculo-cefálica.</li>
+        </ul>
+      </div>
+
+      <select id="bestGaze" onchange="updateScore()">
+        <option value="0">0 - Normal</option>
+        <option value="1">1 - Paralisia parcial do olhar</option>
+        <option value="2">2 - Desvio forçado ou paralisia total do olhar</option>
+      </select>
+    </div>
+
+    <!-- 3: Visual -->
+    <div class="nihss-item">
+      <h3>3. Visual</h3>
+      <div class="instruction-box">
+        <strong>Instruções de Realização:</strong>
+        <p>Teste os campos visuais (quadrantes superiores e inferiores) por confrontação, usando contagem de dedos ou
+          ameaça visual. Se o paciente olhar para o lado do movimento, considere normal. Marque 1 para assimetrias
+          claras (ex: quadrantanopsia), e 3 para cegueira bilateral ou cortical.</p>
+      </div>
+      <div class="scoring-guide">
+        <h4>Critérios de Avaliação:</h4>
+        <ul>
+          <li><strong>0 = Sem perda visual:</strong> Campos visuais normais.</li>
+          <li><strong>1 = Hemianopsia parcial:</strong> Perda visual parcial em um campo visual.</li>
+          <li><strong>2 = Hemianopsia completa:</strong> Perda visual completa em um campo visual.</li>
+          <li><strong>3 = Hemianopsia bilateral:</strong> Cegueira bilateral ou cortical.</li>
+        </ul>
+      </div>
+      <div class="clinical-example">
+        <h4>Exemplo Prático:</h4>
+        <p>No exame de confrontação, o paciente não consegue visualizar movimentos de dedos no quadrante superior
+          esquerdo. Pontuação correta: <strong>1</strong> (hemianopsia parcial).</p>
+      </div>
+      <select id="visual" onchange="updateScore()">
+        <option value="0">0 - Sem perda visual</option>
+        <option value="1">1 - Hemianopsia parcial</option>
+        <option value="2">2 - Hemianopsia completa</option>
+        <option value="3">3 - Hemianopsia bilateral</option>
+      </select>
+    </div>
+
+    <!-- 4: Paralisia Facial -->
+    <div class="nihss-item">
+      <h3>4. Paralisia Facial</h3>
+      <div class="instruction-box">
+        <strong>Instruções de Realização:</strong>
+        <p>Peça ao paciente para mostrar os dentes, sorrir e fechar os olhos. Avalie a simetria facial e resposta ao
+          estímulo. Remova barreiras físicas (ex: curativos) que possam dificultar a avaliação.</p>
+      </div>
+      <div class="scoring-guide">
+        <h4>Critérios de Avaliação:</h4>
+        <ul>
+          <li><strong>0 = Movimentos normais simétricos:</strong> Sem paralisia facial.</li>
+          <li><strong>1 = Paralisia facial leve:</strong> Assimetria leve, como apagamento da prega nasolabial.</li>
+          <li><strong>2 = Paralisia facial central:</strong> Paralisia evidente na região inferior da face.</li>
+          <li><strong>3 = Paralisia facial completa:</strong> Ausência total de movimentos faciais.</li>
+        </ul>
+      </div>
+      <div class="clinical-example">
+        <h4>Exemplo Prático:</h4>
+        <p>O paciente apresenta desvio facial ao tentar sorrir, com perda de movimento na região inferior direita da
+          face. Pontuação correta: <strong>2</strong> (paralisia facial central).</p>
+      </div>
+      <select id="facialParalysis" onchange="updateScore()">
+        <option value="0">0 - Movimentos normais simétricos</option>
+        <option value="1">1 - Paralisia facial leve</option>
+        <option value="2">2 - Paralisia facial central</option>
+        <option value="3">3 - Paralisia facial completa</option>
+      </select>
+    </div>
+
+    <!-- 5a: Motor para Braço Esquerdo -->
+    <div class="nihss-item">
+      <h3>5a. Motor para Braço Esquerdo</h3>
+      <div class="instruction-box">
+        <strong>Instruções de Realização:</strong>
+        <p>Posicione o braço esquerdo a 90º (se sentado) ou 45º (se deitado) e observe por 10 segundos. Avalie se o
+          braço mantém a posição, cai lentamente ou não se move.</p>
+      </div>
+      <div class="scoring-guide">
+        <h4>Critérios de Avaliação:</h4>
+        <ul>
+          <li><strong>0 = Sem queda:</strong> Mantém a posição por 10 segundos.</li>
+          <li><strong>1 = Queda antes dos 10 segundos:</strong> O braço começa a cair antes de completar 10 segundos.
+          </li>
+          <li><strong>2 = Algum esforço contra a gravidade:</strong> O braço cai, mas mostra resistência.</li>
+          <li><strong>3 = Nenhum esforço contra a gravidade:</strong> O braço despenca.</li>
+          <li><strong>4 = Nenhum movimento.</strong></li>
+        </ul>
+      </div>
+      <div class="clinical-example">
+        <h4>Exemplo Prático:</h4>
+        <p>Ao levantar o braço esquerdo, o paciente não consegue mantê-lo elevado e ele cai rapidamente. Pontuação
+          correta: <strong>3</strong> (nenhum esforço contra a gravidade).</p>
+      </div>
+      <select id="motorArmLeft" onchange="updateScore()">
+        <option value="0">0 - Sem queda</option>
+        <option value="1">1 - Queda antes dos 10 segundos</option>
+        <option value="2">2 - Algum esforço contra a gravidade</option>
+        <option value="3">3 - Nenhum esforço contra a gravidade</option>
+        <option value="4">4 - Nenhum movimento</option>
+      </select>
+    </div>
+
+    <!-- 5b: Motor para Braço Direito -->
+    <div class="nihss-item">
+      <h3>5b. Motor para Braço Direito</h3>
+      <div class="instruction-box">
+        <strong>Instruções de Realização:</strong>
+        <p>Posicione o braço direito a 90º (se sentado) ou 45º (se deitado) e observe por 10 segundos. Avalie se o braço
+          mantém a posição, cai lentamente ou não se move.</p>
+      </div>
+      <div class="scoring-guide">
+        <h4>Critérios de Avaliação:</h4>
+        <ul>
+          <li><strong>0 = Sem queda:</strong> Mantém a posição por 10 segundos.</li>
+          <li><strong>1 = Queda antes dos 10 segundos:</strong> O braço começa a cair antes de completar 10 segundos.
+          </li>
+          <li><strong>2 = Algum esforço contra a gravidade:</strong> O braço cai, mas mostra resistência.</li>
+          <li><strong>3 = Nenhum esforço contra a gravidade:</strong> O braço despenca.</li>
+          <li><strong>4 = Nenhum movimento.</strong></li>
+        </ul>
+      </div>
+      <div class="clinical-example">
+        <h4>Exemplo Prático:</h4>
+        <p>O paciente tenta manter o braço direito levantado, mas ele cai após 5 segundos. Pontuação correta:
+          <strong>1</strong> (queda antes dos 10 segundos).
+        </p>
+      </div>
+      <select id="motorArmRight" onchange="updateScore()">
+        <option value="0">0 - Sem queda</option>
+        <option value="1">1 - Queda antes dos 10 segundos</option>
+        <option value="2">2 - Algum esforço contra a gravidade</option>
+        <option value="3">3 - Nenhum esforço contra a gravidade</option>
+        <option value="4">4 - Nenhum movimento</option>
+      </select>
+    </div>
+
+    <!-- 6a: Motor para Perna Esquerda -->
+    <div class="nihss-item">
+      <h3>6a. Motor para Perna Esquerda</h3>
+      <div class="instruction-box">
+        <strong>Instruções de Realização:</strong>
+        <p>Posicione a perna esquerda a 30º e observe por 5 segundos. Avalie se a perna mantém a posição, cai lentamente
+          ou não se move.</p>
+      </div>
+      <div class="scoring-guide">
+        <h4>Critérios de Avaliação:</h4>
+        <ul>
+          <li><strong>0 = Sem queda:</strong> Mantém a posição por 5 segundos.</li>
+          <li><strong>1 = Queda antes dos 5 segundos:</strong> A perna começa a cair antes de completar 5 segundos.</li>
+          <li><strong>2 = Algum esforço contra a gravidade:</strong> A perna cai, mas mostra resistência.</li>
+          <li><strong>3 = Nenhum esforço contra a gravidade:</strong> A perna despenca.</li>
+          <li><strong>4 = Nenhum movimento.</strong></li>
+        </ul>
+      </div>
+      <div class="clinical-example">
+        <h4>Exemplo Prático:</h4>
+        <p>O paciente consegue levantar a perna esquerda, mas ela cai antes dos 5 segundos. Pontuação correta:
+          <strong>1</strong> (queda antes dos 5 segundos).
+        </p>
+      </div>
+      <select id="motorLegLeft" onchange="updateScore()">
+        <option value="0">0 - Sem queda</option>
+        <option value="1">1 - Queda antes dos 5 segundos</option>
+        <option value="2">2 - Algum esforço contra a gravidade</option>
+        <option value="3">3 - Nenhum esforço contra a gravidade</option>
+        <option value="4">4 - Nenhum movimento</option>
+      </select>
+    </div>
+
+    <!-- 6b: Motor para Perna Direita -->
+    <div class="nihss-item">
+      <h3>6b. Motor para Perna Direita</h3>
+      <div class="instruction-box">
+        <strong>Instruções de Realização:</strong>
+        <p>Posicione a perna direita a 30º e observe por 5 segundos. Avalie se a perna mantém a posição, cai lentamente
+          ou não se move.</p>
+      </div>
+      <div class="scoring-guide">
+        <h4>Critérios de Avaliação:</h4>
+        <ul>
+          <li><strong>0 = Sem queda:</strong> Mantém a posição por 5 segundos.</li>
+          <li><strong>1 = Queda antes dos 5 segundos:</strong> A perna começa a cair antes de completar 5 segundos.</li>
+          <li><strong>2 = Algum esforço contra a gravidade:</strong> A perna cai, mas mostra resistência.</li>
+          <li><strong>3 = Nenhum esforço contra a gravidade:</strong> A perna despenca.</li>
+          <li><strong>4 = Nenhum movimento.</strong></li>
+        </ul>
+      </div>
+      <div class="clinical-example">
+        <h4>Exemplo Prático:</h4>
+        <p>O paciente não consegue mover a perna direita e não apresenta esforço contra a gravidade. Pontuação correta:
+          <strong>4</strong> (nenhum movimento).
+        </p>
+      </div>
+      <select id="motorLegRight" onchange="updateScore()">
+        <option value="0">0 - Sem queda</option>
+        <option value="1">1 - Queda antes dos 5 segundos</option>
+        <option value="2">2 - Algum esforço contra a gravidade</option>
+        <option value="3">3 - Nenhum esforço contra a gravidade</option>
+        <option value="4">4 - Nenhum movimento</option>
+      </select>
+    </div>
+
+    <!-- 7: Ataxia de Membros -->
+    <div class="nihss-item">
+      <h3>7. Ataxia de Membros</h3>
+      <div class="instruction-box">
+        <strong>Instruções de Realização:</strong>
+        <p>Avalie se há sinais de lesão cerebelar unilateral. O teste é realizado com olhos abertos, usando o teste
+          índice-nariz e calcanhar-joelho para ambos os lados, considerando ataxia somente quando desproporcional à
+          fraqueza. Para pacientes que não compreendem ou são hemiplégicos, considere ataxia ausente. Em caso de
+          cegueira, teste tocando o nariz com braços estendidos.</p>
+      </div>
+      <div class="scoring-guide">
+        <h4>Critérios de Avaliação:</h4>
+        <ul>
+          <li><strong>0 = Ausente:</strong> Sem evidência de ataxia.</li>
+          <li><strong>1 = Presente em 1 membro:</strong> Ataxia em um único membro.</li>
+          <li><strong>2 = Presente em dois membros:</strong> Ataxia em ambos os membros.</li>
+          <li><strong>NT = Não-testável:</strong> Amputação ou fusão articular, explique.</li>
+        </ul>
+      </div>
+      <div class="clinical-example">
+        <h4>Exemplo Prático:</h4>
+        <p>Ao realizar o teste índice-nariz, o paciente apresenta ataxia apenas no braço direito, com desvio visível ao
+          tentar tocar o nariz. Pontuação correta: <strong>1</strong> (presente em 1 membro).</p>
+      </div>
+      <select id="ataxiaLimbs" onchange="updateScore()">
+        <option value="0">0 - Ausente</option>
+        <option value="1">1 - Presente em 1 membro</option>
+        <option value="2">2 - Presente em dois membros</option>
+        <option value="NT">NT - Não-testável</option>
+      </select>
+    </div>
+
+    <!-- 8: Sensibilidade -->
+    <div class="nihss-item">
+      <h3>8. Sensibilidade</h3>
+      <div class="instruction-box">
+        <strong>Instruções de Realização:</strong>
+        <p>Avalie a sensibilidade ao beliscar em várias partes do corpo (exceto mãos). Apenas a perda sensitiva
+          atribuída ao AVC deve ser registrada. Pacientes em coma (Item 1A=3) recebem automaticamente 2.</p>
+      </div>
+      <div class="scoring-guide">
+        <h4>Critérios de Avaliação:</h4>
+        <ul>
+          <li><strong>0 = Normal:</strong> Sem perda sensitiva.</li>
+          <li><strong>1 = Perda leve a moderada:</strong> Sensibilidade reduzida ou percepção de dor menos intensa.</li>
+          <li><strong>2 = Perda grave ou total:</strong> O paciente não percebe estímulo doloroso.</li>
+        </ul>
+      </div>
+      <div class="clinical-example">
+        <h4>Exemplo Prático:</h4>
+        <p>Ao beliscar o braço esquerdo, o paciente demonstra sensibilidade reduzida, mas consegue perceber o toque.
+          Pontuação correta: <strong>1</strong> (perda sensitiva leve a moderada).</p>
+      </div>
+      <select id="sensitivity" onchange="updateScore()">
+        <option value="0">0 - Normal</option>
+        <option value="1">1 - Perda leve a moderada</option>
+        <option value="2">2 - Perda grave ou total</option>
+      </select>
+    </div>
+
+    <!-- 9: Melhor Linguagem -->
+    <div class="nihss-item">
+      <h3>9. Melhor Linguagem</h3>
+      <div class="instruction-box">
+        <strong>Instruções de Realização:</strong>
+        <p>Solicite ao paciente que descreva um quadro, nomeie objetos e leia frases. Avalie a compreensão com base nas
+          respostas e nos comandos anteriores. Pacientes em coma (Item 1A=3) recebem automaticamente 3.</p>
+      </div>
+      <div class="scoring-guide">
+        <h4>Critérios de Avaliação:</h4>
+        <ul>
+          <li><strong>0 = Sem afasia:</strong> Comunicação normal.</li>
+          <li><strong>1 = Afasia leve a moderada:</strong> Redução da fluência ou compreensão, mas consegue se comunicar
+            com ajuda.</li>
+          <li><strong>2 = Afasia grave:</strong> Comunicação fragmentada, exigindo muita interpretação.</li>
+          <li><strong>3 = Mudo, afasia global:</strong> Nenhuma fala ou compreensão útil.</li>
+        </ul>
+      </div>
+      <div class="clinical-example">
+        <h4>Exemplo Prático:</h4>
+        <p>O paciente responde com palavras isoladas ao descrever o quadro, dificultando a interpretação. Pontuação
+          correta: <strong>2</strong> (afasia grave).</p>
+      </div>
+      <select id="bestLanguage" onchange="updateScore()">
+        <option value="0">0 - Sem afasia</option>
+        <option value="1">1 - Afasia leve a moderada</option>
+        <option value="2">2 - Afasia grave</option>
+        <option value="3">3 - Mudo, afasia global</option>
+      </select>
+    </div>
+
+    <!-- 10: Disartria -->
+    <div class="nihss-item">
+      <h3>10. Disartria</h3>
+      <div class="instruction-box">
+        <strong>Instruções de Realização:</strong>
+        <p>Se o paciente parecer normal, peça que ele leia ou repita palavras. Para pacientes com afasia grave, avalie a
+          clareza da fala espontânea. Este item é considerado não-testável (NT) apenas em casos de intubação ou
+          barreiras físicas à fala. Não informe o motivo do teste ao paciente.</p>
+      </div>
+      <div class="scoring-guide">
+        <h4>Critérios de Avaliação:</h4>
+        <ul>
+          <li><strong>0 = Normal:</strong> Sem dificuldade de articulação.</li>
+          <li><strong>1 = Disartria leve a moderada:</strong> Algumas palavras são arrastadas, mas o paciente é
+            compreensível.</li>
+          <li><strong>2 = Disartria grave:</strong> Fala ininteligível, empastada ou o paciente é mudo.</li>
+          <li><strong>NT = Não-testável:</strong> Intubado ou outra barreira física, explique.</li>
+        </ul>
+      </div>
+      <div class="clinical-example">
+        <h4>Exemplo Prático:</h4>
+        <p>O paciente arrasta algumas palavras ao falar, mas ainda é compreensível. Pontuação correta:
+          <strong>1</strong> (disartria leve a moderada).
+        </p>
+      </div>
+      <select id="dysarthria" onchange="updateScore()">
+        <option value="0">0 - Normal</option>
+        <option value="1">1 - Disartria leve a moderada</option>
+        <option value="2">2 - Disartria grave</option>
+        <option value="NT">NT - Não-testável</option>
+      </select>
+    </div>
+
+    <!-- 11: Extinção ou Desatenção -->
+    <div class="nihss-item">
+      <h3>11. Extinção ou Desatenção</h3>
+      <div class="instruction-box">
+        <strong>Instruções de Realização:</strong>
+        <p>Identifique negligência visual, tátil, auditiva ou espacial a partir dos testes anteriores. Para pacientes
+          com afasia ou perda visual grave, considere normais se há atenção bilateral. Anosognosia e negligência
+          espacial visual podem indicar desatenção.</p>
+      </div>
+      <div class="scoring-guide">
+        <h4>Critérios de Avaliação:</h4>
+        <ul>
+          <li><strong>0 = Nenhuma anormalidade:</strong> Atenção normal.</li>
+          <li><strong>1 = Desatenção leve:</strong> Desatenção ou extinção em uma modalidade sensorial.</li>
+          <li><strong>2 = Hemi-desatenção profunda:</strong> Desatenção em mais de uma modalidade; o paciente ignora um
+            lado do corpo ou espaço.</li>
+        </ul>
+      </div>
+      <div class="clinical-example">
+        <h4>Exemplo Prático:</h4>
+        <p>O paciente reage apenas ao estímulo em um lado quando ambos os lados são estimulados simultaneamente.
+          Pontuação correta: <strong>1</strong> (desatenção leve).</p>
+      </div>
+      <select id="extinctionNeglect" onchange="updateScore()">
+        <option value="0">0 - Nenhuma anormalidade</option>
+        <option value="1">1 - Desatenção leve</option>
+        <option value="2">2 - Hemi-desatenção profunda</option>
+      </select>
+    </div>
+
+    <div class="total-score" id="totalScore">
+      Pontuação Total NIHSS: 0
+    </div>
+
+    <div class="button-container" style="display: flex; justify-content: space-between; align-items: center;">
+      <div>
+        <button onclick="startTest()" class="start-button">Iniciar Teste</button>
+        <button onclick="finalizeTest()" class="finalize-button">Finalizar Teste</button>
+        <button onclick="clearLastEntry()" class="clear-last-button">Limpar Último Teste</button>
+        <button onclick="clearAllEntries()" class="clear-all-button">Limpar Tudo</button>
+        <button onclick="printPage()" class="print-button">Imprimir</button>
+      </div>
+      <p style="margin: 0; font-size: 12px; text-align: right;">
+        Adaptado por Welton Cardoso dos Santos - Neurologia - HCUFMG
+      </p>
+    </div>
+
+    <!-- Tabela de Evolução -->
+    <h2>Tabela de Evolução</h2>
+    <table id="evolutionTable" border="1" cellspacing="0" cellpadding="5">
+      <thead>
+        <tr>
+          <th>Data Início</th>
+          <th>Hora Início</th>
+          <th>Data Final</th>
+          <th>Hora Final</th>
+          <th>Escore</th>
+          <th>Examinador</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- As novas linhas serão adicionadas aqui -->
+      </tbody>
+    </table>
+
+    </p>
+
+    <script>
+      let currentScore = 0;
+      let startTime = null;
+
+      function startTest() {
+        // Registra a data e hora de início do teste
+        startTime = new Date();
+        alert("Teste iniciado em " + startTime.toLocaleDateString("pt-BR") + " às " + startTime.toLocaleTimeString("pt-BR"));
+      }
+
+      function parseDate() {
+        const [year, month, day] = dateString.split('-').map(Number);
+        return new Date(Date.UTC(year, month - 1, day));
+      }
+
+      function calculaIdade() {
+        const dataNascimento = parseDate(document.getElementById("dataNascimento").value);
+        console.log(document.getElementById("dataNascimento").value)
+        console.log(dataNascimento);
+        const hoje = new Date();
+
+        let idade = hoje.getFullYear() - dataNascimento.getFullYear();
+        const mesDiff = hoje.getMonth() - dataNascimento.getMonth();
+
+        if (mesDiff < 0 || (mesDiff === 0 && hoje.getDate() < dataNascimento.getDate())) {
+          idade--;
+        }
+        if (!isNaN(idade)) document.getElementById("idade").value = idade;
+      }
+
+      function updateScore() {
+        let score1A = parseInt(document.getElementById("consciousnessLevel")?.value) || 0;
+        let score1B = parseInt(document.getElementById("consciousnessQuestions")?.value) || 0;
+        let score1C = parseInt(document.getElementById("consciousnessCommands")?.value) || 0;
+        let score2 = parseInt(document.getElementById("bestGaze")?.value) || 0;
+        let score3 = parseInt(document.getElementById("visual")?.value) || 0;
+        let score4 = parseInt(document.getElementById("facialParalysis")?.value) || 0;
+        let score5A = parseInt(document.getElementById("motorArmLeft")?.value) || 0;
+        let score5B = parseInt(document.getElementById("motorArmRight")?.value) || 0;
+        let score6A = parseInt(document.getElementById("motorLegLeft")?.value) || 0;
+        let score6B = parseInt(document.getElementById("motorLegRight")?.value) || 0;
+        let score7 = parseInt(document.getElementById("ataxiaLimbs")?.value) || 0;
+        let score8 = parseInt(document.getElementById("sensitivity")?.value) || 0;
+        let score9 = parseInt(document.getElementById("bestLanguage")?.value) || 0;
+        let score10 = parseInt(document.getElementById("dysarthria")?.value) || 0;
+        let score11 = parseInt(document.getElementById("extinctionNeglect")?.value) || 0;
+
+        currentScore = score1A + score1B + score1C + score2 + score3 + score4 + score5A + score5B + score6A + score6B + score7 + score8 + score9 + score10 + score11;
+        document.getElementById("totalScore").innerText = `Pontuação Total NIHSS: ${currentScore}`;
+      }
+
+      function finalizeTest() {
+        if (!startTime) {
+          alert("Por favor, inicie o teste antes de finalizar.");
+          return;
+        }
+
+        // Registra a data e hora de finalização do teste
+        const endTime = new Date();
+
+        // Adiciona uma nova linha na tabela de evolução com os horários de início e finalização
+        const tableBody = document.getElementById("evolutionTable").querySelector("tbody");
+        const row = document.createElement("tr");
+
+        // Data de Início
+        const startDateCell = document.createElement("td");
+        startDateCell.textContent = startTime.toLocaleDateString("pt-BR");
+        row.appendChild(startDateCell);
+
+        // Hora de Início
+        const startTimeCell = document.createElement("td");
+        startTimeCell.textContent = startTime.toLocaleTimeString("pt-BR");
+        row.appendChild(startTimeCell);
+
+        // Data de Finalização
+        const endDateCell = document.createElement("td");
+        endDateCell.textContent = endTime.toLocaleDateString("pt-BR");
+        row.appendChild(endDateCell);
+
+        // Hora de Finalização
+        const endTimeCell = document.createElement("td");
+        endTimeCell.textContent = endTime.toLocaleTimeString("pt-BR");
+        row.appendChild(endTimeCell);
+
+        // Escore Final
+        const scoreCell = document.createElement("td");
+        scoreCell.textContent = currentScore;
+        row.appendChild(scoreCell);
+
+        // Examinador (deixar em branco)
+        const examinerCell = document.createElement("td");
+        examinerCell.textContent = "";  // Campo em branco para o examinador
+        row.appendChild(examinerCell);
+
+        // Adiciona a nova linha ao corpo da tabela
+        tableBody.appendChild(row);
+
+        // Resetar a hora de início para o próximo teste
+        startTime = null;
+      }
+
+      function clearScores() {
+        document.querySelectorAll('select').forEach(select => select.value = "0");
+        updateScore();
+      }
+
+      function clearAllEntries() {
+        document.getElementById("evolutionTable").querySelector("tbody").innerHTML = "";
+      }
+
+      function clearLastEntry() {
+        const tableBody = document.getElementById("evolutionTable").querySelector("tbody");
+        if (tableBody.lastChild) {
+          tableBody.removeChild(tableBody.lastChild);
+        }
+      }
+
+      function printPage() {
+        window.print();
+      }
+    </script>
+
+    <!-- Frases para leitura (Item 9: Melhor Linguagem) -->
+    <div class="phrases nihss-item">
+      <h3>Frases para Leitura (Item 9: Melhor Linguagem)</h3>
+      <ul>
+        <li>Você sabe como fazer.</li>
+        <li>De volta pra casa.</li>
+        <li>Eu cheguei em casa do trabalho.</li>
+        <li>Próximo da mesa, na sala de jantar.</li>
+        <li>Eles ouviram o Pelé falar no rádio.</li>
+      </ul>
+    </div>
+
+    <!-- Lista de palavras para disartria (Item 10: Disartria) -->
+    <div class="words nihss-item">
+      <h3>Lista de Palavras para Disartria (Item 10: Disartria)</h3>
+      <ul>
+        <li>Mamãe</li>
+        <li>Tic-Tac</li>
+        <li>Paralelo</li>
+        <li>Obrigado</li>
+        <li>Estrada de ferro</li>
+        <li>Jogador de futebol</li>
+      </ul>
+    </div>
+
+    <!-- Código restante do documento -->
+    <div class="nihss-rules">
+      <h2>Regras:</h2>
+      <ul>
+        <li>Pontue o que você vê, não o que você pensa.</li>
+        <li>Pontue a primeira resposta, não a melhor resposta (exceto o Item 9 – Linguagem).</li>
+        <li>Não treine o paciente.</li>
+        <li>Escala de AVC do NIH – National Institutes of Health</li>
+      </ul>
+
+      <h2>Instruções:</h2>
+      <ul>
+        <li>Administre os itens da escala de AVC na ordem listada.</li>
+        <li>Registre o desempenho em cada categoria após cada exame de subescala.</li>
+        <li>Não volte e mude as pontuações.</li>
+        <li>Siga as instruções fornecidas para cada técnica de exame.</li>
+        <li>As pontuações devem refletir o que o paciente faz e não o que o médico pensa que o paciente pode fazer.</li>
+        <li>O médico deve registrar as respostas enquanto administra o exame.</li>
+        <li>Exceto quando indicado, o paciente não deve ser orientado (isto é, pedidos repetidos ao paciente para que
+          faça um esforço especial).</li>
+      </ul>
+
+      <h2>Fatos:</h2>
+      <ul>
+        <li>A escala possui 11 itens (15 critérios clínicos). A pontuação total é de 0 a 42, sendo que quanto maior a
+          pontuação pior o déficit.</li>
+        <li>Menos que 5 pontos = déficit leve, pontuação entre 5 e 17 = déficit moderado e pontuação acima de 22 =
+          déficit grave.</li>
+        <li>O NIHSS é também uma ferramenta importante para iniciar o rtPA (alteplase), tendo os melhores resultados
+          entre 4-22. Além disso, avalia a eficácia do trombolítico, sendo positivo quando existe redução de 8 pontos na
+          escala.</li>
+      </ul>
+
+      <h2>Interpretação da Pontuação:</h2>
+      <ul>
+        <li>Pontuação total de 0-3: Provavelmente terão bons resultados clínicos no seguimento.</li>
+        <li>Pontuação total de 4-21: Avaliar quanto à possibilidade de terapia fibrinolítica.</li>
+        <li>Pontuação total > 22: Avaliar caso a caso quanto à possibilidade de terapia fibrinolítica (principalmente em
+          pacientes com mais de 80 anos) – maior risco de sangramento.</li>
+      </ul>
+      <div>
+        <img src="assets/imagem_1.jpg" class="responsive-img width-50p">
+        <img src="assets/imagem_2.jpg" class="responsive-img width-30p">
+      </div>
+    </div>
+
+</body>
+
+</html>
