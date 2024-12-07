@@ -5,24 +5,145 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mini Exame do Estado Mental (MEEM)</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f9f9; margin: 0; padding: 0; }
-        .container { max-width: 900px; margin: 20px auto; padding: 20px; background-color: #fff; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); border-radius: 10px; }
-        h1 { text-align: center; color: #333; font-size: 24px; margin-bottom: 20px; }
-        .header { margin-bottom: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .header label { display: block; margin-top: 10px; font-weight: bold; }
-        .header input, .header select { width: 100%; padding: 5px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; }
-        .question { margin-bottom: 15px; }
-        .question p { margin: 0; font-weight: bold; color: #333; }
-        .question label { display: block; margin-left: 20px; font-weight: normal; }
-        .results { margin-top: 20px; }
-        button { margin-top: 20px; padding: 10px 20px; background-color: #28a745; color: #fff; border: none; border-radius: 5px; cursor: pointer; }
-        button:hover { background-color: #218838; }
-        .footer { margin-top: 30px; font-size: 12px; color: #555; text-align: center; }
-        .small-text { font-size: 10px; color: #555; text-align: center; margin-top: 20px; }
-        .instructions { background-color: #d9edf7; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
-        .reference-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        .reference-table th, .reference-table td { border: 1px solid #ddd; padding: 8px; text-align: center; }
-        .reference-table th { background-color: #f2f2f2; }
+        /* Estilo Geral */
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: #f3f4f6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        /* Container Principal */
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 25px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Título Principal */
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        /* Informações Iniciais */
+        .header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        .header label {
+            font-weight: bold;
+            color: #555;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        .header input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #dcdcdc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        /* Perguntas */
+        .question {
+            margin-bottom: 20px;
+        }
+        .question p {
+            margin: 0 0 10px 0;
+            font-weight: bold;
+            font-size: 16px;
+            color: #34495e;
+        }
+        .question label {
+            display: block;
+            margin-left: 20px;
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        /* Botões */
+        button {
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #ffffff;
+            background-color: #3498db;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .action-buttons button {
+            background-color: #2ecc71;
+        }
+        .action-buttons button:hover {
+            background-color: #27ae60;
+        }
+
+        /* Resultados */
+        .results {
+            text-align: center;
+            margin-top: 25px;
+        }
+        .results p {
+            font-size: 18px;
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        /* Resumo */
+        .summary {
+            margin-top: 30px;
+            background-color: #f9f9f9;
+            border: 1px solid #dcdcdc;
+            padding: 15px;
+            border-radius: 10px;
+        }
+        .summary h3 {
+            font-size: 18px;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        .summary p {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Rodapé */
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 12px;
+            color: #888;
+        }
+
+        /* Créditos */
+        .small-text {
+            font-size: 12px;
+            color: #aaa;
+            text-align: center;
+            margin-top: 15px;
+        }
     </style>
 </head>
 <body>
@@ -31,15 +152,15 @@
         <div class="header">
             <div>
                 <label for="nome">Nome do Paciente:</label>
-                <input type="text" id="nome" name="nome">
+                <input type="text" id="nome" name="nome" placeholder="Digite o nome do paciente">
             </div>
             <div>
                 <label for="idade">Idade:</label>
-                <input type="number" id="idade" name="idade" min="0">
+                <input type="number" id="idade" name="idade" min="0" placeholder="Digite a idade">
             </div>
             <div>
                 <label for="escolaridade">Escolaridade:</label>
-                <input type="text" id="escolaridade" name="escolaridade">
+                <input type="text" id="escolaridade" name="escolaridade" placeholder="Digite a escolaridade">
             </div>
             <div>
                 <label for="data">Data:</label>
@@ -47,134 +168,96 @@
             </div>
         </div>
 
-        <div class="instructions">
-            <p><strong>Instruções:</strong></p>
-            <p>Aplicar os 11 testes seguindo as orientações conforme o nível de instrução do paciente, assinalando a pontuação obtida em cada item. Anexar a este instrumento os registros gráficos (frase e desenho) realizados pelo paciente em folha à parte (itens 10 e 11), com a identificação do usuário.</p>
-        </div>
-
         <form id="meemForm">
-            <!-- Perguntas do MEEM -->
+            <!-- Questões do MEEM -->
             <div class="question">
                 <p>1. Orientação temporal (0 a 5 pontos)</p>
-                <p>Perguntar ao paciente e pontuar apenas a primeira tentativa, sem qualquer forma de dica. Pontue 1 para resposta correta e 0 para resposta errada:</p>
-                <label><input type="checkbox" name="q1" value="1"> Em que ano estamos?</label>
-                <label><input type="checkbox" name="q1" value="1"> Em que estação do ano estamos?</label>
-                <label><input type="checkbox" name="q1" value="1"> Qual o dia da semana em que estamos?</label>
-                <label><input type="checkbox" name="q1" value="1"> Qual o dia do mês em que estamos?</label>
-                <label><input type="checkbox" name="q1" value="1"> Qual o mês em que estamos?</label>
+                <p>Faça perguntas relacionadas ao tempo. Pontue 1 para cada resposta correta na primeira tentativa.</p>
+                <label><input type="checkbox" name="q1" value="1" data-label="Dia da semana"> Qual o dia da semana?</label>
+                <label><input type="checkbox" name="q1" value="1" data-label="Dia do mês"> Qual o dia do mês?</label>
+                <label><input type="checkbox" name="q1" value="1" data-label="Mês"> Qual o mês?</label>
+                <label><input type="checkbox" name="q1" value="1" data-label="Ano"> Qual o ano?</label>
+                <label><input type="checkbox" name="q1" value="1" data-label="Hora aproximada"> Qual a hora aproximada?</label>
             </div>
             <div class="question">
                 <p>2. Orientação espacial (0 a 5 pontos)</p>
-                <p>Perguntar ao paciente e pontuar apenas a primeira tentativa, sem qualquer forma de dica. Pontue 1 para resposta correta e 0 para resposta errada:</p>
-                <label><input type="checkbox" name="q2" value="1"> Qual o país onde estamos?</label>
-                <label><input type="checkbox" name="q2" value="1"> Qual o estado onde estamos?</label>
-                <label><input type="checkbox" name="q2" value="1"> Qual a cidade onde estamos?</label>
-                <label><input type="checkbox" name="q2" value="1"> Qual a rua ou local onde estamos?</label>
-                <label><input type="checkbox" name="q2" value="1"> Qual o andar onde estamos?</label>
+                <p>Pergunte sobre o local onde o paciente está. Pontue 1 para cada resposta correta.</p>
+                <label><input type="checkbox" name="q2" value="1" data-label="Local específico"> Local específico (aposento ou setor)</label>
+                <label><input type="checkbox" name="q2" value="1" data-label="Instituição"> Instituição (hospital ou clínica)</label>
+                <label><input type="checkbox" name="q2" value="1" data-label="Bairro ou rua próxima"> Bairro ou rua próxima</label>
+                <label><input type="checkbox" name="q2" value="1" data-label="Cidade"> Cidade</label>
+                <label><input type="checkbox" name="q2" value="1" data-label="Estado"> Estado</label>
             </div>
             <div class="question">
-                <p>3. Registro de três palavras (0 a 3 pontos)</p>
-                <p>Pedir para o paciente repetir as três palavras "PENTE", "RUA" e "AZUL". Pontue 1 para cada palavra repetida corretamente na primeira tentativa. Se o paciente não repetir todas na primeira tentativa, tente novamente por até 5 vezes até que ele repita as três palavras. Entretanto, para fins de pontuação neste item, considere apenas a primeira tentativa. Você pode alertar o paciente que preste atenção e que mais tarde vai pedir para ele lembrar essas palavras.</p>
-                <label><input type="checkbox" name="q3" value="1"> Pente</label>
-                <label><input type="checkbox" name="q3" value="1"> Rua</label>
-                <label><input type="checkbox" name="q3" value="1"> Azul</label>
+                <p>3. Memória imediata (0 a 3 pontos)</p>
+                <p>Peça ao paciente para repetir as palavras "Vaso", "Carro" e "Tijolo". Pontue 1 para cada palavra correta na primeira tentativa.</p>
+                <label><input type="checkbox" name="q3" value="1" data-label="Vaso"> Vaso</label>
+                <label><input type="checkbox" name="q3" value="1" data-label="Carro"> Carro</label>
+                <label><input type="checkbox" name="q3" value="1" data-label="Tijolo"> Tijolo</label>
             </div>
             <div class="question">
                 <p>4. Atenção e cálculo (0 a 5 pontos)</p>
-                <p>Pedir ao paciente fazer cinco subtrações seriadas, partindo de 100 – 7. Não importa se o paciente disser que não sabe fazer cálculo, tente mesmo assim. Você pode estimular o paciente a prosseguir após cada subtração, mas não deve recordar/evocar o resultado anterior. Pontue 1 para cada subtração correta (93 – 86 – 79 – 72 – 65).</p>
-                <label><input type="checkbox" name="q4" value="1"> 93</label>
-                <label><input type="checkbox" name="q4" value="1"> 86</label>
-                <label><input type="checkbox" name="q4" value="1"> 79</label>
-                <label><input type="checkbox" name="q4" value="1"> 72</label>
-                <label><input type="checkbox" name="q4" value="1"> 65</label>
-                <p>Alternativo: caso o paciente seja analfabeto ou erre a primeira ou a segunda subtração, interrompa o cálculo e peça para que ele soletrar, em ordem inversa, a palavra "MUNDO". Pontue 1 para cada letra correta na ordem.</p>
-                <label><input type="checkbox" name="q4alt" value="1"> O</label>
-                <label><input type="checkbox" name="q4alt" value="1"> D</label>
-                <label><input type="checkbox" name="q4alt" value="1"> N</label>
-                <label><input type="checkbox" name="q4alt" value="1"> U</label>
-                <label><input type="checkbox" name="q4alt" value="1"> M</label>
+                <p>Peça ao paciente para realizar subtrações seriadas de 7, começando em 100. Pontue 1 para cada resposta correta.</p>
+                <label><input type="checkbox" name="q4" value="1" data-label="93"> 93</label>
+                <label><input type="checkbox" name="q4" value="1" data-label="86"> 86</label>
+                <label><input type="checkbox" name="q4" value="1" data-label="79"> 79</label>
+                <label><input type="checkbox" name="q4" value="1" data-label="72"> 72</label>
+                <label><input type="checkbox" name="q4" value="1" data-label="65"> 65</label>
             </div>
             <div class="question">
                 <p>5. Evocação (0 a 3 pontos)</p>
-                <p>Peça ao paciente recordar as três palavras que ele repetiu anteriormente em voz alta ("PENTE", "RUA" e "AZUL"). Pontue 1 para cada palavra corretamente evocada.</p>
-                <label><input type="checkbox" name="q5" value="1"> Pente</label>
-                <label><input type="checkbox" name="q5" value="1"> Rua</label>
-                <label><input type="checkbox" name="q5" value="1"> Azul</label>
+                <p>Peça ao paciente para recordar as palavras "Vaso", "Carro" e "Tijolo". Pontue 1 para cada palavra correta.</p>
+                <label><input type="checkbox" name="q5" value="1" data-label="Vaso"> Vaso</label>
+                <label><input type="checkbox" name="q5" value="1" data-label="Carro"> Carro</label>
+                <label><input type="checkbox" name="q5" value="1" data-label="Tijolo"> Tijolo</label>
             </div>
             <div class="question">
-                <p>6. Linguagem: Nomeação (0 a 2 pontos)</p>
-                <p>Mostre um lápis ou caneta e peça que o paciente nomeie. Pontue 1 se disser o nome correto.</p>
-                <label><input type="checkbox" name="q6" value="1"> Lápis ou Caneta</label>
-                <p>Mostre um relógio e peça que o paciente nomeie. Pontue 1 se disser o nome correto.</p>
-                <label><input type="checkbox" name="q6" value="1"> Relógio</label>
+                <p>6. Linguagem (0 a 6 pontos)</p>
+                <p>Inclui nomeação, repetição e comandos. Pontue 1 para cada resposta correta.</p>
+                <label><input type="checkbox" name="q6" value="1" data-label="Relógio"> Nomear relógio</label>
+                <label><input type="checkbox" name="q6" value="1" data-label="Caneta"> Nomear caneta</label>
+                <label><input type="checkbox" name="q6" value="1" data-label="Repetir frase"> Repetir: "Nem aqui, nem ali, nem lá"</label>
+                <label><input type="checkbox" name="q6" value="1" data-label="Comando 1"> Pegue o papel com a mão direita</label>
+                <label><input type="checkbox" name="q6" value="1" data-label="Comando 2"> Dobre o papel ao meio</label>
+                <label><input type="checkbox" name="q6" value="1" data-label="Comando 3"> Coloque o papel no chão</label>
             </div>
             <div class="question">
-                <p>7. Linguagem: Repetição (0 a 1 ponto)</p>
-                <p>Peça para o paciente repetir a seguinte frase: “nem aqui, nem ali, nem lá”. Pontue 1 se ele repetir corretamente a frase.</p>
-                <label><input type="checkbox" name="q7" value="1"> Nem aqui, nem ali, nem lá</label>
+                <p>7. Escrita (0 a 1 ponto)</p>
+                <p>Peça ao paciente para escrever uma frase completa com sentido. Pontue 1 se o objetivo for atingido.</p>
+                <label><input type="checkbox" name="q7" value="1" data-label="Frase completa"> Frase completa</label>
             </div>
             <div class="question">
-                <p>8. Linguagem: Compreensão oral (0 a 3 pontos)</p>
-                <p>Deixe a disposição do paciente uma folha de papel e forneça o seguinte comando verbal, sem demonstrar com gestos: “(1) pegue o papel com a sua mão direita, (2) dobre ao meio e (3) coloque no chão”. Pontue 1 para cada uma das 3 ordens anteriores que forem executadas corretamente.</p>
-                <label><input type="checkbox" name="q8" value="1"> Pegue o papel com a mão direita</label>
-                <label><input type="checkbox" name="q8" value="1"> Dobre ao meio</label>
-                <label><input type="checkbox" name="q8" value="1"> Coloque no chão</label>
-            </div>
-            <div class="question">
-                <p>9. Linguagem: Compreensão escrita (0 a 1 ponto)</p>
-                <p>Mostre ao paciente um papel em que esteja escrito a frase “FECHE OS OLHOS” e peça que ele execute esse comando. Pontue 1 se ele fizer corretamente o comando.</p>
-                <label><input type="checkbox" name="q9" value="1"> Feche os olhos</label>
-            </div>
-            <div class="question">
-                <p>10. Linguagem: Escrita (0 a 1 ponto)</p>
-                <p>Ofereça um lápis/caneta e papel e peça que o paciente escreva uma frase completa. Pontue 1 se ele escrever uma frase que contenha sujeito, mesmo que implícito. Não leve em consideração erros de ortografia. Palavras únicas não são pontuadas.</p>
-                <label><input type="checkbox" name="q10" value="1"> Frase completa</label>
-            </div>
-            <div class="question">
-                <p>11. Visuoespacial (0 a 1 ponto)</p>
-                <p>Mostre ao paciente o desenho da intersecção dos pentágonos e peça que ele tente copiar o desenho. Pontue 1 se o paciente produzir dois pentágonos (5 ângulos cada) com a intersecção correta (4 ângulos).</p>
-                <label><input type="checkbox" name="q11" value="1"> Cópia correta dos pentágonos</label>
-                <p><img src="assets/pentagons.jpg" alt="Desenho dos pentágonos" width="150"></p>
+                <p>8. Visuoespacial (0 a 1 ponto)</p>
+                <p>Peça ao paciente para copiar dois pentágonos que se cruzam. Pontue 1 se a figura estiver correta.</p>
+                <label><input type="checkbox" name="q8" value="1" data-label="Copiar figura"> Copiar figura</label>
             </div>
 
+            <!-- Resultados -->
             <div class="results">
                 <button type="button" onclick="calculateScore()">Calcular Pontuação</button>
                 <p id="totalScore"></p>
             </div>
-            <button type="button" onclick="resetForm()">Resetar</button>
-        </form>
-        <button onclick="window.print()">Imprimir</button>
 
-        <div class="instructions">
-            <table class="reference-table">
-                <tr>
-                    <th>Anos concluídos de educação formal</th>
-                    <th>Pontuação</th>
-                </tr>
-                <tr>
-                    <td>Analfabetos</td>
-                    <td>&lt; 21</td>
-                </tr>
-                <tr>
-                    <td>1 a 5 anos de escolaridade</td>
-                    <td>&lt; 24</td>
-                </tr>
-                <tr>
-                    <td>6 a 11 anos de escolaridade</td>
-                    <td>&lt; 26</td>
-                </tr>
-                <tr>
-                    <td>12 anos de escolaridade ou mais</td>
-                    <td>&lt; 27</td>
-                </tr>
-            </table>
+            <!-- Botões de ação -->
+            <div class="action-buttons">
+                <button type="button" onclick="resetForm()">Resetar Formulário</button>
+                <button type="button" onclick="window.print()">Imprimir</button>
+            </div>
+        </form>
+
+        <div class="summary" id="summary">
+            <h3>Resumo de Campos Não Pontuados:</h3>
+            <div id="summaryContent"></div>
         </div>
 
         <div class="footer">
-            <p>Folstein MF, Folstein SE, McHugh PR. "Mini-mental state". A practical method for grading the cognitive state of patients for the clinician. Journal of Psychiatric Research, 1975, 12(3): 189–198.</p>
+            <p>Desenvolvido com base no protocolo MEEM.</p>
         </div>
+
         <div class="small-text">
-            <p>HTML por Welton Cardoso dos Santos (HC-UFMG)</p>
+            <p>HTML por Welton Cardoso dos Santos - Neurologia HC-UFMG</p>
+            <p>Fonte: FOLSTEIN, M. F.; FOLSTEIN, S. E.; MCHUGH, P. R. "Mini-mental state". A practical method for grading the cognitive state of patients for the clinician. J Psychiatr Res, 12, n. 3, p. 189-198, Nov 1975.</p>
+            <p>BRUCKI, S. M.; NITRINI, R.; CARAMELLI, P.; BERTOLUCCI, P. H. et al. Sugestões para o uso do Mini-Exame do Estado Mental no Brasil. Arq Neuropsiquiatr., 61, p. 777-781, 2003.</p>
         </div>
     </div>
 
@@ -182,31 +265,56 @@
         function calculateScore() {
             const form = document.forms['meemForm'];
             let total = 0;
-            const questions = ['q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8', 'q9', 'q10', 'q11', 'q4alt'];
+            const questions = [
+                { name: 'q1', title: 'Orientação temporal' },
+                { name: 'q2', title: 'Orientação espacial' },
+                { name: 'q3', title: 'Memória imediata' },
+                { name: 'q4', title: 'Atenção e cálculo' },
+                { name: 'q5', title: 'Evocação' },
+                { name: 'q6', title: 'Linguagem' },
+                { name: 'q7', title: 'Escrita' },
+                { name: 'q8', title: 'Visuoespacial' }
+            ];
+            const missedFields = {};
 
-            questions.forEach(questionName => {
-                const elements = form[questionName];
+            questions.forEach(({ name, title }) => {
+                const elements = form[name];
+                missedFields[title] = [];
+
                 if (elements) {
                     if (elements.length) {
                         for (let element of elements) {
                             if (element.checked) {
                                 total += parseInt(element.value);
+                            } else {
+                                missedFields[title].push(element.getAttribute('data-label'));
                             }
                         }
                     } else {
-                        if (elements.checked) {
-                            total += parseInt(elements.value);
+                        if (!elements.checked) {
+                            missedFields[title].push(elements.getAttribute('data-label'));
                         }
                     }
                 }
             });
 
-            document.getElementById('totalScore').innerText = 'Pontuação Total: ' + total;
+            document.getElementById('totalScore').innerText = `Pontuação Total: ${total} / 30`;
+
+            const summaryContent = document.getElementById('summaryContent');
+            summaryContent.innerHTML = '';
+            Object.entries(missedFields).forEach(([title, items]) => {
+                if (items.length > 0) {
+                    const p = document.createElement('p');
+                    p.innerHTML = `<strong>${title}:</strong> ${items.join(', ')}`;
+                    summaryContent.appendChild(p);
+                }
+            });
         }
 
         function resetForm() {
             document.getElementById('meemForm').reset();
             document.getElementById('totalScore').innerText = '';
+            document.getElementById('summaryContent').innerHTML = '';
         }
     </script>
 </body>
